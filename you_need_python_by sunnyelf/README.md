@@ -1,0 +1,3 @@
+- rfc4042 为 utf9 or utf18， 详见decodeutf9.py
+- flag.py中marshal.loads()处理的是二进制流，用uncompyle2反编译，详见flag.py，将其解码到f.py，有源码后用utf9解码的key爆破
+- utf9解码出的key并不是真正的key，无法爆破出来，需要对其进行16进制转换后才行，运行decodeutf9.py即可
