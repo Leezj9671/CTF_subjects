@@ -1,5 +1,5 @@
 # Solution
-解压zip有两个文件，一个是flag.py，一个是key_is_here_but_do_you_know_rfc4042。
+解压zip有两个文件，分别是flag.py，key_is_here_but_do_you_know_rfc4042。
 首先第一步看提示rfc4042的文件，查询可得，它是utf9或者是utf18的编码。在github上找到utf9解码的库，代码如下：
 ```
 import utf9
@@ -38,7 +38,7 @@ key = eval(ns)
 print key
 # 5287002131074331513 key
 ```
-第二步是难点，看marshal.loads()应该处理之后的是编译后的二进制流，查阅资料 http://www.cnblogs.com/rainduck/p/3524557.html找到反编译的方法，因此用uncompyle2是最好不过的了，反编译得出py文件。
+第二步是难点，看marshal.loads()应该处理之后的是编译后的二进制流，查阅资料 http://www.cnblogs.com/rainduck/p/3524557.html 找到反编译的方法，因此用uncompyle2是最好不过的了，反编译得出py文件。
 ```
 import marshal, zlib, base64
 
@@ -62,10 +62,10 @@ def encrypt(plain, key):
     return ''.join(map(lambda x: str(x), r))
 ```
 
-对key进行sha1加密为16进制串，再处理为10进制串保存到intSHA1；
-对plain里面的每一位ascii编码与keySHA1的某位进行相加后减去intSHA1，放入r中；
-intSHA1变化为plain前i位的sha1前二十位与intSHA1的SHA1前二十位相加的十进制值；
-将r中的元素转化为字符串得到加密后的字符串，因此，该加密方法是前后字符关联的，第n位的加密都与前n-1位有关。
+- 对key进行sha1加密为16进制串，再处理为10进制串保存到intSHA1；
+- 对plain里面的每一位ascii编码与keySHA1的某位进行相加后减去intSHA1，放入r中；
+- intSHA1变化为plain前i位的sha1前二十位与intSHA1的SHA1前二十位相加的十进制值；
+- 将r中的元素转化为字符串得到加密后的字符串，因此，该加密方法是前后字符关联的，第n位的加密都与前n-1位有关。
 了解了加密方法后，接下来尝试用第一步爆出的key爆破，爆破代码如下：
 ```
 ...
