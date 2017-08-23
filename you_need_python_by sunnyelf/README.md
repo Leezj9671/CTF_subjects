@@ -94,3 +94,4 @@ print kk
 ```
 
 将key代入爆破代码即可解出flag。
+flag{Lif3_i5_5h0r7_U_n33d_Py7h0n}
