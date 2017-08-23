@@ -1,5 +1,4 @@
-今天碰到了一个比较有意思的综合题目，记下来给大家看看。
-题目和脚本地址：
+# Solution
 解压zip有两个文件，一个是flag.py，一个是key_is_here_but_do_you_know_rfc4042。
 首先第一步看提示rfc4042的文件，查询可得，它是utf9或者是utf18的编码。在github上找到utf9解码的库，代码如下：
 ```
